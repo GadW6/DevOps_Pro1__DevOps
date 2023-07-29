@@ -1,0 +1,28 @@
+# Traefik-EdgeProxy Stack
+
+version: "3.8"
+
+services:
+  traefik:
+    image: traefik:latest
+    # container_name: Traefik-ExtProxy 
+    restart: unless-stopped
+    deploy:
+      replicas: 3
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      # TODO: Enable if want to implement auto discovery with other services on portainer
+      # - /var/run/docker.sock:/var/run/docker.sock
+      - /var/docker-data/traefik/:/etc/traefik
+    networks:
+      - public-net
+    # cpu_shares: 256  # CPU shares for the container (adjust as needed)
+    # mem_limit: 512m  # Memory limit for the container (adjust as needed)
+
+networks:
+  public-net:
+    name: public
+    external: true

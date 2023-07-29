@@ -1,0 +1,20 @@
+## Dynamic configuration
+http:
+  routers:
+    my-router:
+      rule: "PathPrefix(`/app`)"
+      middlewares:
+        - "remove-app-prefix"
+      service: 'my-service'
+            
+  middlewares:
+    remove-app-prefix:
+      stripPrefix:
+        prefixes:
+          - "/app"
+
+  services:
+    my-service:
+      loadBalancer:
+        servers:
+          - url: "http://httpd-test-web-1"
