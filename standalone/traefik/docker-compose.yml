@@ -1,4 +1,4 @@
-# Traefik-EdgeProxy Stack
+# traefik-edgeproxy Stack
 
 version: "3.8"
 
@@ -7,8 +7,6 @@ services:
     image: traefik:latest
     # container_name: Traefik-ExtProxy 
     restart: unless-stopped
-    deploy:
-      replicas: 3
     ports:
       - "80:80"
       - "443:443"
@@ -16,7 +14,7 @@ services:
     volumes:
       # TODO: Enable if want to implement auto discovery with other services on portainer
       # - /var/run/docker.sock:/var/run/docker.sock
-      - /var/docker-data/standalone/traefik/:/etc/traefik
+      - /var/docker-conf/standalone/traefik/:/etc/traefik
     networks:
       - public-net
     # cpu_shares: 256  # CPU shares for the container (adjust as needed)
