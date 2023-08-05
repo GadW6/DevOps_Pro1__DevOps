@@ -7,7 +7,19 @@ services:
     stdin_open: true
     tty: true
     restart: unless-stopped
-    # ports:
-    #   - "80:80"    
     volumes:
       - /var/docker-conf/standalone/ansible/data:/app
+
+  semaphore:
+    ports:
+      - 3000:3000
+    image: semaphoreui/semaphore:latest
+    environment:
+      SEMAPHORE_DB_DIALECT: bolt
+      SEMAPHORE_ADMIN_PASSWORD: changeme
+      SEMAPHORE_ADMIN_NAME: admin
+      SEMAPHORE_ADMIN_EMAIL: admin@localhost
+      SEMAPHORE_ADMIN: admin
+    volumes:
+      - /var/docker-conf/standalone/ansible/semaphore:/etc/semaphore
+      - /var/docker-data/standalone/ansible:/var/lib/semaphore
