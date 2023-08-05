@@ -10,4 +10,4 @@ services:
     # ports:
     #   - "80:80"    
     volumes:
-      - /var/docker-data/traefik/:/etc/traefik
+      - /var/docker-conf/standalone/ansible/data:/app
