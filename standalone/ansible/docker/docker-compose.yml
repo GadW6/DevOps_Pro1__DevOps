@@ -17,13 +17,13 @@ services:
     image: alpine/ansible-semaphore:latest
     user: semaphore
     environment:
-      # SEMAPHORE_DB_USER: semaphore
-      # SEMAPHORE_DB_PASS: semaphore
-      # SEMAPHORE_DB_HOST: mysql
-      # SEMAPHORE_DB_PORT: 3306
-      # SEMAPHORE_DB_DIALECT: mysql
-      # SEMAPHORE_DB: semaphore
-      # SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
+      SEMAPHORE_DB_USER: semaphore
+      SEMAPHORE_DB_PASS: semaphore
+      SEMAPHORE_DB_HOST: semaphore-mysql
+      SEMAPHORE_DB_PORT: 3306
+      SEMAPHORE_DB_DIALECT: mysql
+      SEMAPHORE_DB: semaphore
+      SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
       SEMAPHORE_ADMIN_PASSWORD: password
       SEMAPHORE_ADMIN_NAME: Administrator
       SEMAPHORE_ADMIN_EMAIL: admin@domain.com
@@ -36,8 +36,8 @@ services:
   mysql:
     restart: unless-stopped
     image: mysql:8.0
-    container_name: mysql
-    hostname: mysql
+    container_name: semaphore-mysql
+    hostname: semaphore-mysql
     volumes:
       - semaphore-mysql:/var/lib/mysql
     environment:
