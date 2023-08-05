@@ -2,7 +2,7 @@
 version: "3.8"
 
 services:
-  traefik:
+  ansible:
     image: alpine/ansible:latest
     stdin_open: true
     tty: true
@@ -10,16 +10,39 @@ services:
     volumes:
       - /var/docker-conf/standalone/ansible/data:/app
 
+  mysql:
+    restart: unless-stopped
+    image: mysql:8.0
+    container_name: mysql
+    hostname: mysql
+    volumes:
+      - semaphore-mysql:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_DATABASE: semaphore
+      MYSQL_USER: semaphore
+      MYSQL_PASSWORD: semaphore
+
   semaphore:
     ports:
       - 3000:3000
     image: semaphoreui/semaphore:latest
     environment:
-      SEMAPHORE_DB_DIALECT: bolt
+      SEMAPHORE_DB_USER: semaphore
+      SEMAPHORE_DB_PASS: semaphore
+      SEMAPHORE_DB_HOST: mysql
+      SEMAPHORE_DB_PORT: 3306
+      SEMAPHORE_DB_DIALECT: mysql
+      SEMAPHORE_DB: semaphore
+      SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
       SEMAPHORE_ADMIN_PASSWORD: changeme
       SEMAPHORE_ADMIN_NAME: admin
       SEMAPHORE_ADMIN_EMAIL: admin@localhost
       SEMAPHORE_ADMIN: admin
+      SEMAPHORE_ACCESS_KEY_ENCRYPTION: gs72mPntFATGJs9qK0pQ0rKtfidlexiMjYCH9gWKhTU=
     volumes:
       - /var/docker-conf/standalone/ansible/semaphore:/etc/semaphore
       - /var/docker-data/standalone/ansible:/var/lib/semaphore
+
+volumes:
+  semaphore-mysql:
