@@ -36,8 +36,8 @@ services:
   mysql:
     restart: unless-stopped
     image: mysql:8.0
-    container_name: semaphore-mysql
-    hostname: semaphore-mysql
+    container_name: mysql
+    hostname: mysql
     volumes:
       - semaphore-mysql:/var/lib/mysql
     environment:

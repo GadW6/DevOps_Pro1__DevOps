@@ -1,6 +1,6 @@
 {
   "mysql": {
-          "host": "semaphore-mysql:3306",
+          "host": "mysql:3306",
           "user": "semaphore",
           "pass": "semaphore",
           "name": "semaphore",
