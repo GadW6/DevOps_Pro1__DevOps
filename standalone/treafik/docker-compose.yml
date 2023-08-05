@@ -16,7 +16,7 @@ services:
     volumes:
       # TODO: Enable if want to implement auto discovery with other services on portainer
       # - /var/run/docker.sock:/var/run/docker.sock
-      - /var/docker-data/traefik/:/etc/traefik
+      - /var/docker-data/standalone/traefik/:/etc/traefik
     networks:
       - public-net
     # cpu_shares: 256  # CPU shares for the container (adjust as needed)
