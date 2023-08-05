@@ -1,0 +1,13 @@
+# ansible
+version: "3.8"
+
+services:
+  traefik:
+    image: alpine/ansible:latest
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    # ports:
+    #   - "80:80"    
+    volumes:
+      - /var/docker-data/traefik/:/etc/traefik
