@@ -9,7 +9,7 @@ services:
     ports:
       - "80"
     volumes:
-      - /var/docker-data/standalone/httpd/:/usr/local/apache2/htdocs/
+      - /var/docker-conf/standalone/httpd/views:/usr/local/apache2/htdocs/
     networks:
       - public-net
 
