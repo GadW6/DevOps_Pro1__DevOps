@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  httpd:
+    image: httpd:latest
+    container_name: httpd
+    volumes:
+      - ../boot:/usr/local/apache2/htdocs
+    ports:
+      - 8082:80
+
+
+  packer:
+    image: hashicorp/packer:latest
+    container_name: packer
+    depends_on: 
+      - httpd 
+    working_dir: /workspace
+    volumes:
+      - ../scripts:/workspace/scripts
+      - ../pkr:/workspace/pkr
+      - ../../common.pkr.hcl:/workspace/pkr/common.pkr.hcl
+      - ../../variables.auto.pkr.hcl:/workspace/pkr/variables.auto.pkr.hcl
+    environment:
+      - PACKER_PLUGIN_PATH=/workspace/.packer.d/plugins
+    command: ["scripts/entrypoint.sh"]
+    entrypoint: ["/bin/sh"]
