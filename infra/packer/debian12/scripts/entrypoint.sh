@@ -11,5 +11,6 @@ packer validate pkr/
 echo "Templates are valid !"
 
 echo "Building ..." 
+# packer build -timestamp-ui -machine-readable --only=debian-10Gb-builder.* pkr/
 packer build -timestamp-ui -machine-readable pkr/
 echo "Build completed !"

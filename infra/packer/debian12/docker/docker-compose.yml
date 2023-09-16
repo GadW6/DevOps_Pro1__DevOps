@@ -20,7 +20,8 @@ services:
       - ../scripts:/workspace/scripts
       - ../pkr:/workspace/pkr
       - ../../common.pkr.hcl:/workspace/pkr/common.pkr.hcl
-      - ../../variables.auto.pkr.hcl:/workspace/pkr/variables.auto.pkr.hcl
+      - ../../global.env.auto.pkr.hcl:/workspace/pkr/global.env.auto.pkr.hcl
+      - ../boot:/workspace/boot
     environment:
       - PACKER_PLUGIN_PATH=/workspace/.packer.d/plugins
     command: ["scripts/entrypoint.sh"]

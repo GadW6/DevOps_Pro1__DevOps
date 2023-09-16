@@ -1,2 +1,5 @@
+# ENV Files
 .env
-variables.auto.pkr.hcl
+
+# ENV Packer Files
+.env.auto.pkr.hcl
