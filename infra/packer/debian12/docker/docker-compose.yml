@@ -4,6 +4,8 @@ services:
   httpd:
     image: httpd:latest
     container_name: httpd
+    depends_on: 
+      - packer
     volumes:
       - ../boot:/usr/local/apache2/htdocs
     ports:
