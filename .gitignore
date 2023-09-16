@@ -2,4 +2,4 @@
 .env
 
 # ENV Packer Files
-.env.auto.pkr.hcl
+*.env.auto.pkr.hcl
