@@ -7,8 +7,8 @@ source "proxmox-iso" "debian-bookworm-25Gb" {
   username = "${var.USERNAME}"
   insecure_skip_tls_verify = true
 
-  template_name = "Debian12"
-  template_description = "Debian 12-1.0, generated on ${timestamp()}"
+  template_name = "Debian12-25Gb"
+  template_description = "<b>${timestamp()} : </b> Debian 12-1.0 (25Gb)"
   vm_name = "Debian12-25Gb"
   vm_id = 10002
 
@@ -41,12 +41,12 @@ source "proxmox-iso" "debian-bookworm-25Gb" {
   cloud_init_storage_pool = "local-lvm"
 
   # Boot Loading
-  boot_wait = "5s"
+  boot_wait = "15s"
   boot_command = [
     "<down><down><enter>",
     "<down><down><down><down><down><down><enter>",
     "<wait60s>",
-    "http://${var.LOCAL_IP}:8082/preseed-25gb.cfg",
+    "http://${var.LOCAL_IP}:8082/preseed.cfg",
     "<enter><wait>"
   ]
   
